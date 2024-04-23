@@ -18,7 +18,6 @@ include "./include/config.php";
 <body onload="runPB1()">
 	<div class="app-bar">
 		<a class="app-bar-element" href="login.php">SPK Metode SMART</a>
-		<a class="app-bar-element place-right">About</a>
 	</div>
 
 	<h2 style="text-align:center;margin:100px auto 0 auto;">Login Member</h2>
@@ -27,13 +26,15 @@ include "./include/config.php";
 		if (isset($_POST['username']) && isset($_POST['password'])) {
 			$user = $_POST['username'];
 			$pass = md5($_POST['password']);
-			$stmt = $db->prepare("SELECT * from smart_admin where username='$user' and password='$pass' limit 0,1");
+			$stmt = $db->prepare("SELECT * from smart_admin where username=:username and password=:password limit 0,1");
+			$stmt->bindParam(':username', $user);
+			$stmt->bindParam(':password', $pass);
 			$stmt->execute();
 			$row = $stmt->fetch();
-			if ($row['username'] == $user && $row['password'] = $pass) {
+			if ($row) {
 				session_start();
-				$_SESSION['id'] = $row['id_admin'];
-				$_SESSION['nama'] = $row['nama_admin'];
+				$_SESSION['id_admin'] = $row['id_admin'];
+				$_SESSION['nama_admin'] = $row['nama_admin'];
 				$_SESSION['username'] = $row['username'];
 
 				// Redirect based on role

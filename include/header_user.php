@@ -1,13 +1,11 @@
 <?php
 include "config.php";
 session_start();
-if (!isset($_SESSION['username'])) {
-?>
-	<script>
-		window.location.assign("login.php")
-	</script>
-<?php
+if (!isset($_SESSION['id_admin'])) {
+	exit();
 }
+
+$id_admin = $_SESSION['id_admin']; // ID pengguna yang sedang aktif
 ?>
 <!DOCTYPE html>
 <html>

@@ -1,7 +1,7 @@
 <?php
 include "config.php";
 session_start();
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['id_admin'])) {
 ?>
 	<script>
 		window.location.assign("login.php")
@@ -23,7 +23,7 @@ if (!isset($_SESSION['username'])) {
 
 <body>
 	<div class="app-bar">
-		<a class="app-bar-element" href="...">SPK Metode SMART</a>
+		<a class="app-bar-element" href="../admin/index.php">SPK Metode SMART</a>
 		<span class="app-bar-divider"></span>
 		<ul class="app-bar-menu">
 			<li><a href="kriteria.php">Kriteria</a></li>
@@ -58,7 +58,15 @@ if (!isset($_SESSION['username'])) {
 						<li><a href="index.php"><span class="mif-home icon"></span> Beranda</a></li>
 						<li class="divider"></li>
 						<li class="menu-title">Menu</li>
-						<li><a href="data_warga.php"><span class="mif-users icon"></span> Data Warga</a></li>
+						<li><a href="#" class="dropdown-toggle"><span class="mif-users icon"></span> Data Warga</a>
+							<ul class="d-menu" data-role="dropdown">
+								<li><a href="rt1.php">RT 1</a></li>
+								<li><a href="rt2.php">RT 2</a></li>
+								<li><a href="rt3.php">RT 3</a></li>
+								<li><a href="rt4.php">RT 4</a></li>
+								<li><a href="rt5.php">RT 5</a></li>
+							</ul>
+						</li>
 						<li><a href="kriteria.php"><span class="mif-florist icon"></span> Kriteria</a></li>
 						<li><a href="subkriteria.php"><span class="mif-layers icon"></span> Sub Kriteria</a></li>
 						<li><a href="alternatif.php"><span class="mif-stack icon"></span> Alternatif</a></li>
@@ -67,7 +75,6 @@ if (!isset($_SESSION['username'])) {
 						<li class="divider"></li>
 						<li class="menu-title">Pengguna</li>
 						<li><a href="operator.php"><span class="mif-user icon"></span> Operator</a></li>
-						<li><a href="ubahpassword.php"><span class="mif-key icon"></span> Ubah Password</a></li>
 						<li><a href="logout.php"><span class="mif-cross icon"></span> Logout</a></li>
 					</ul>
 

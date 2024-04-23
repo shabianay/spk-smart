@@ -8,11 +8,12 @@ include "../include/header_user.php";
         border: 1px solid #ccc;
         border-radius: 5px;
         background-color: #f9f9f9;
+        text-align: center;
     }
 
     .info-kelurahan img {
-        float: left;
-        margin-right: 10px;
+        border-radius: 10%;
+        margin-bottom: 10px;
     }
 
     .info-kelurahan p {
@@ -28,15 +29,14 @@ include "../include/header_user.php";
     <div class="cell">
         <h3>Informasi Kelurahan</h3>
         <div class="info-kelurahan">
-            <!-- <img src="../img/Gambar WhatsApp 2024-04-21 pukul 21.00.33_8ad3b56e.jpg" alt="logo" width="50" height="50"> -->
-        <p><strong>Nama Kelurahan:</strong> Kelurahan Kepanjin</p>
+            <img src="../img/kelurahan.jpg" alt="logo" width="300">
+            <p><strong>Nama Kelurahan:</strong> Kelurahan Kepanjin</p>
             <p><strong>Alamat:</strong> Jl Pujangga No. 27 A, Kelurahan Kepanjin, Kab. Sumenep, 69415</p>
             <p><strong>No Telepon:</strong> -</p>
             <p><strong>Kecamatan:</strong> Kota Sumenep</p>
             <p><strong>Kabupaten:</strong> Sumenep</p>
             <p><strong>Provinsi:</strong> Jawa Timur</p>
             <p><strong>Negara:</strong> Indonesia</p>
-            <p><strong>Email:</strong> kelurahankpanjin@gmail.com</p>
             <p><strong>Akun Instagram:</strong> <a href="https://www.instagram.com/kelurahan.kepanjin">kelurahan.kepanjin</a></p>
         </div>
     </div>
