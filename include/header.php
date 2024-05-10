@@ -4,7 +4,7 @@ session_start();
 if (!isset($_SESSION['id_admin'])) {
 ?>
 	<script>
-		window.location.assign("login.php")
+		window.location.assign("index.php")
 	</script>
 <?php
 }
@@ -65,6 +65,15 @@ if (!isset($_SESSION['id_admin'])) {
 								<li><a href="rt3.php">RT 3</a></li>
 								<li><a href="rt4.php">RT 4</a></li>
 								<li><a href="rt5.php">RT 5</a></li>
+								<li><a href="rt6.php">RT 6</a></li>
+								<li><a href="rt7.php">RT 7</a></li>
+								<li><a href="rt8.php">RT 8</a></li>
+								<li><a href="rt9.php">RT 9</a></li>
+								<li><a href="rt10.php">RT 10</a></li>
+								<li><a href="rt11.php">RT 11</a></li>
+								<li><a href="rt12.php">RT 12</a></li>
+								<li><a href="rt13.php">RT 13</a></li>
+								<li><a href="data_warga.php">Data Warga Keseluruhan</a></li>
 							</ul>
 						</li>
 						<li><a href="kriteria.php"><span class="mif-florist icon"></span> Kriteria</a></li>

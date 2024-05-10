@@ -14,6 +14,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : "";
             <th>Nama</th>
             <th>Alamat</th>
             <th>NIK</th>
+            <th>Penghasilan</th>
             <th width="250">Aksi</th>
         </tr>
     </thead>
@@ -30,6 +31,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : "";
                 <td><?php echo $row['nama'] ?></td>
                 <td><?php echo $row['alamat'] ?></td>
                 <td><?php echo $row['nik'] ?></td>
+                <td><?php echo $row['penghasilan'] ?></td>
                 <td class="align-center">
                     <a href="detail.php?id=<?php echo $row['id'] ?>" class="button info"><span class="mif-eye icon"></span> Detail</a>
                 </td>

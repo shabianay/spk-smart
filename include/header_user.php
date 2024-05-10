@@ -51,6 +51,7 @@ $id_admin = $_SESSION['id_admin']; // ID pengguna yang sedang aktif
 						<li class="divider"></li>
 						<li class="menu-title">Menu</li>
 						<li><a href="data_warga.php"><span class="mif-stack icon"></span> Data Warga</a></li>
+						<li><a href="laporan.php"><span class="mif-file-pdf icon"></span> Laporan</a></li>
 						<li class="divider"></li>
 						<li class="menu-title">Pengguna</li>
 						<li><a href="ubahpassword.php"><span class="mif-key icon"></span> Ubah Password</a></li>

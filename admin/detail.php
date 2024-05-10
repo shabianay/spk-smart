@@ -13,9 +13,9 @@ if (isset($_GET['id'])) {
             <div class="cell colspan2">
                 <h3>Data Detail Warga</h3>
             </div>
-            <div class="cell colspan2 align-right">
+            <!-- <div class="cell colspan2 align-right">
                 <a href="data_warga.php" class="button info">Kembali</a>
-            </div>
+            </div> -->
         </div>
         <p></p>
         <table class="table striped">
@@ -30,6 +30,10 @@ if (isset($_GET['id'])) {
             <tr>
                 <td><strong>NIK</strong></td>
                 <td><?php echo $row['nik']; ?></td>
+            </tr>
+            <tr>
+                <td><strong>Penghasilan</strong></td>
+                <td><?php echo $row['penghasilan']; ?></td>
             </tr>
             <tr>
                 <td><strong>Foto Dokumen</strong></td>

@@ -32,6 +32,10 @@ if (isset($_GET['id'])) {
                 <td><?php echo $row['nik']; ?></td>
             </tr>
             <tr>
+                <td><strong>Penghasilan</strong></td>
+                <td><?php echo $row['penghasilan']; ?></td>
+            </tr>
+            <tr>
                 <td><strong>Foto Dokumen</strong></td>
                 <td>
                     <img src="<?php echo $row['foto1']; ?>" width="250" height="250" alt="Foto 1">

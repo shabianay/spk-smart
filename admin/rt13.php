@@ -4,12 +4,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : "";
 ?>
 <div class="row cells4">
     <div class="cell colspan2">
-        <h3>Data Warga Keselurahan</h3>
-    </div>
-</div>
-<div class="row cells4">
-    <div class="cell colspan2">
-        <a href="cetak.php" class="button primary"><span class="mif-download icon"></span> Cetak Data</a>
+        <h3>Data Warga</h3>
     </div>
 </div>
 <table class="table striped hovered cell-hovered border bordered dataTable" data-role="datatable" data-searching="true">
@@ -25,7 +20,8 @@ $page = isset($_GET['page']) ? $_GET['page'] : "";
     </thead>
     <tbody>
         <?php
-        $stmt = $db->prepare("SELECT * FROM data_warga");
+        $stmt = $db->prepare("SELECT * FROM data_warga WHERE id_admin = ?");
+        $stmt->bindValue(1, 17);
         $stmt->execute();
         $no = 1;
         while ($row = $stmt->fetch()) {

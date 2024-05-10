@@ -19,29 +19,39 @@ $page = isset($_GET['page']) ? $_GET['page'] : "";
             $nama = $_POST['nama'];
             $alamat = $_POST['alamat'];
             $nik = $_POST['nik'];
+            $penghasilan = $_POST['penghasilan'];
 
             // Simpan 5 foto dokumen ke server
             $foto_names = [];
-            for ($i = 1; $i <= 5; $i++) {
+            for (
+                $i = 1;
+                $i <= 5;
+                $i++
+            ) {
                 $foto_name = 'foto_' . $i;
-                $target_dir = "../uploads/";
-                $target_file = $target_dir . basename($_FILES[$foto_name]["name"]);
-                move_uploaded_file($_FILES[$foto_name]["tmp_name"], $target_file);
-                $foto_names[] = $target_file;
+                if ($_FILES[$foto_name]["error"] == UPLOAD_ERR_NO_FILE) {
+                    $foto_names[] = null; // Simpan null jika foto tidak diunggah
+                } else {
+                    $target_dir = "../uploads/";
+                    $target_file = $target_dir . basename($_FILES[$foto_name]["name"]);
+                    move_uploaded_file($_FILES[$foto_name]["tmp_name"], $target_file);
+                    $foto_names[] = $target_file;
+                }
             }
 
             $id_admin = $_SESSION['id_admin']; // ID admin yang sedang aktif
 
-            $stmt2 = $db->prepare("INSERT INTO data_warga (nama, alamat, nik, foto1, foto2, foto3, foto4, foto5, id_admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt2 = $db->prepare("INSERT INTO data_warga (nama, alamat, nik, penghasilan, foto1, foto2, foto3, foto4, foto5, id_admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $stmt2->bindParam(1, $nama);
             $stmt2->bindParam(2, $alamat);
             $stmt2->bindParam(3, $nik);
-            $stmt2->bindParam(4, $foto_names[0]);
-            $stmt2->bindParam(5, $foto_names[1]);
-            $stmt2->bindParam(6, $foto_names[2]);
-            $stmt2->bindParam(7, $foto_names[3]);
-            $stmt2->bindParam(8, $foto_names[4]);
-            $stmt2->bindParam(9, $id_admin);
+            $stmt2->bindParam(4, $penghasilan);
+            $stmt2->bindParam(5, $foto_names[0]);
+            $stmt2->bindParam(6, $foto_names[1]);
+            $stmt2->bindParam(7, $foto_names[2]);
+            $stmt2->bindParam(8, $foto_names[3]);
+            $stmt2->bindParam(9, $foto_names[4]);
+            $stmt2->bindParam(10, $id_admin);
 
             if ($stmt2->execute()) {
 ?>
@@ -59,37 +69,41 @@ $page = isset($_GET['page']) ? $_GET['page'] : "";
         }
 ?>
 <form method="post" enctype="multipart/form-data">
-    <label>Nama</label>
+    <label>Nama</label><span style="color: red;">*</span>
     <div class="input-control text full-size">
         <input type="text" name="nama" placeholder="Nama Warga" required>
     </div>
-    <label>Alamat</label>
+    <label>Alamat</label><span style="color: red;">*</span>
     <div class="input-control text full-size">
         <input type="text" name="alamat" placeholder="Alamat" required>
     </div>
-    <label>NIK</label>
+    <label>NIK</label><span style="color: red;">*</span>
     <div class="input-control text full-size">
         <input type="text" name="nik" placeholder="NIK" required>
     </div>
+    <label>Penghasilan</label><span style="color: red;">*</span>
+    <div class="input-control text full-size">
+        <input type="text" name="penghasilan" placeholder="Penghasilan" required>
+    </div>
     <label>Foto Dokumen</label>
     <div class="input-control file full-size" data-role="input">
-        <input type="file" name="foto_1" accept="image/*" placeholder="Pilih foto 1...">
+        <input type="file" name="foto_1" accept="image/*" placeholder="KTP" required>
         <button class="button"><span class="mif-folder"></span></button>
     </div>
     <div class="input-control file full-size" data-role="input">
-        <input type="file" name="foto_2" accept="image/*" placeholder="Pilih foto 2...">
+        <input type="file" name="foto_2" accept="image/*" placeholder="KK (Kartu Keluarga)" required>
         <button class="button"><span class="mif-folder"></span></button>
     </div>
     <div class="input-control file full-size" data-role="input">
-        <input type="file" name="foto_3" accept="image/*" placeholder="Pilih foto 3...">
+        <input type="file" name="foto_3" accept="image/*" placeholder="Akta nikah/cerai">
         <button class="button"><span class="mif-folder"></span></button>
     </div>
     <div class="input-control file full-size" data-role="input">
-        <input type="file" name="foto_4" accept="image/*" placeholder="Pilih foto 4...">
+        <input type="file" name="foto_4" accept="image/*" placeholder="Pekerjaan">
         <button class="button"><span class="mif-folder"></span></button>
     </div>
     <div class="input-control file full-size" data-role="input">
-        <input type="file" name="foto_5" accept="image/*" placeholder="Pilih foto 5...">
+        <input type="file" name="foto_5" accept="image/*" placeholder="Foto lainnya">
         <button class="button"><span class="mif-folder"></span></button>
     </div>
     <button type="submit" name="simpan" class="button primary">Simpan</button>
@@ -114,27 +128,53 @@ $page = isset($_GET['page']) ? $_GET['page'] : "";
                     $nama = $_POST['nama'];
                     $alamat = $_POST['alamat'];
                     $nik = $_POST['nik'];
+                    $penghasilan = $_POST['penghasilan'];
 
                     // Simpan 5 foto dokumen ke server
                     $foto_names = [];
-                    for ($i = 1; $i <= 5; $i++) {
+                    for (
+                        $i = 1;
+                        $i <= 5;
+                        $i++
+                    ) {
                         $foto_name = 'foto_' . $i;
-                        $target_dir = "../uploads/";
-                        $target_file = $target_dir . basename($_FILES[$foto_name]["name"]);
-                        move_uploaded_file($_FILES[$foto_name]["tmp_name"], $target_file);
-                        $foto_names[] = $target_file;
+                        if ($_FILES[$foto_name]["error"] == UPLOAD_ERR_NO_FILE) {
+                            $foto_names[] = null; // Simpan null jika foto tidak diunggah
+                        } else {
+                            $target_dir = "../uploads/";
+                            $target_file = $target_dir . basename($_FILES[$foto_name]["name"]);
+                            move_uploaded_file($_FILES[$foto_name]["tmp_name"], $target_file);
+                            $foto_names[] = $target_file;
+                        }
                     }
 
-                    $stmt2 = $db->prepare("UPDATE data_warga SET nama = ?, alamat = ?, nik = ?, foto1 = ?, foto2 = ?, foto3 = ?, foto4 = ?, foto5 = ? WHERE id = ?");
+
+                    $stmt2 = $db->prepare("UPDATE data_warga SET nama = ?, alamat = ?, nik = ?, penghasilan = ?, foto1 = ?, foto2 = ?, foto3 = ?, foto4 = ?, foto5 = ? WHERE id = ?");
                     $stmt2->bindParam(1, $nama);
                     $stmt2->bindParam(2, $alamat);
                     $stmt2->bindParam(3, $nik);
-                    $stmt2->bindParam(4, $foto_names[0]);
-                    $stmt2->bindParam(5, $foto_names[1]);
-                    $stmt2->bindParam(6, $foto_names[2]);
-                    $stmt2->bindParam(7, $foto_names[3]);
-                    $stmt2->bindParam(8, $foto_names[4]);
-                    $stmt2->bindParam(9, $id);
+                    $stmt2->bindParam(4, $penghasilan);
+                    $stmt2->bindParam(
+                        5,
+                        $foto_names[0] ? $foto_names[0] : null
+                    );
+                    $stmt2->bindParam(
+                        6,
+                        $foto_names[1] ? $foto_names[1] : null
+                    );
+                    $stmt2->bindParam(
+                        7,
+                        $foto_names[2] ? $foto_names[2] : null
+                    );
+                    $stmt2->bindParam(
+                        8,
+                        $foto_names[3] ? $foto_names[3] : null
+                    );
+                    $stmt2->bindParam(
+                        9,
+                        $foto_names[4] ? $foto_names[4] : null
+                    );
+                    $stmt2->bindParam(10, $id);
 
                     if ($stmt2->execute()) {
                         echo "<script>alert('Data berhasil diubah')</script>";
@@ -157,6 +197,10 @@ $page = isset($_GET['page']) ? $_GET['page'] : "";
             <label>NIK</label>
             <div class="input-control text full-size">
                 <input type="text" name="nik" placeholder="NIK" value="<?php echo $row['nik']; ?>">
+            </div>
+            <label>Penghasilan</label>
+            <div class="input-control text full-size">
+                <input type="text" name="penghasilan" placeholder="Penghasilan" value="<?php echo $row['penghasilan']; ?>">
             </div>
             <label>Foto Dokumen</label>
             <div class="input-control file full-size" data-role="input">
@@ -235,6 +279,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : "";
             <th>Nama</th>
             <th>Alamat</th>
             <th>NIK</th>
+            <th>Penghasilan</th>
             <th width="250">Aksi</th>
         </tr>
     </thead>
@@ -251,6 +296,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : "";
                 <td><?php echo $row['nama'] ?></td>
                 <td><?php echo $row['alamat'] ?></td>
                 <td><?php echo $row['nik'] ?></td>
+                <td><?php echo $row['penghasilan'] ?></td>
                 <td class="align-center">
                     <a href="detail.php?id=<?php echo $row['id'] ?>" class="button info"><span class="mif-eye icon"></span> Detail</a>
                     <a href="?page=edit&id=<?php echo $row['id'] ?>" class="button warning"><span class="mif-pencil icon"></span> Edit</a>
