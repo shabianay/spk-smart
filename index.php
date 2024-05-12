@@ -17,7 +17,7 @@ include "./include/config.php";
 
 <body onload="runPB1()">
 	<div class="app-bar">
-		<a class="app-bar-element" href="login.php">SPK Metode SMART</a>
+		<a class="app-bar-element" href="index.php">SPK Metode SMART</a>
 	</div>
 
 	<h2 style="text-align:center;margin:100px auto 0 auto;">Login Member</h2>
