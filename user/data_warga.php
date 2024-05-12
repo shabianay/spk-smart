@@ -28,15 +28,13 @@ $page = isset($_GET['page']) ? $_GET['page'] : "";
                 $i++
             ) {
                 $foto_name = 'foto_' . $i;
-                if ($_FILES[$foto_name]["error"] == UPLOAD_ERR_NO_FILE) {
-                    $foto_names[] = 'MISSING'; // Placeholder for missing file
-                } else {
+                if ($_FILES[$foto_name]["error"] != UPLOAD_ERR_NO_FILE) {
                     $target_dir = "../uploads/";
                     $target_file = $target_dir . basename($_FILES[$foto_name]["name"]);
-                    if ($i == 3 && !move_uploaded_file($_FILES[$foto_name]["tmp_name"], $target_file)) {
-                        $foto_names[] = 'UPLOAD_FAILED'; // Placeholder for failed upload
-                    } else {
+                    if (move_uploaded_file($_FILES[$foto_name]["tmp_name"], $target_file)) {
                         $foto_names[] = $target_file;
+                    } else {
+                        $foto_names[] = 'UPLOAD_FAILED'; // Or another placeholder value
                     }
                 }
             }
@@ -89,7 +87,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : "";
     </div>
     <label>Foto Dokumen</label>
     <div class="input-control file full-size" data-role="input">
-        <input type="file" name="foto_1" accept="image/*" placeholder="KTP">
+        <input type="file" name="foto_1" accept="image/*" placeholder="KTP" required>
         <button class="button"><span class="mif-folder"></span></button>
     </div>
     <div class="input-control file full-size" data-role="input">
@@ -97,15 +95,15 @@ $page = isset($_GET['page']) ? $_GET['page'] : "";
         <button class="button"><span class="mif-folder"></span></button>
     </div>
     <div class="input-control file full-size" data-role="input">
-        <input type="file" name="foto_3" accept="image/*" placeholder="Akta nikah/cerai">
+        <input type="file" name="foto_3" accept="image/*" placeholder="Akta nikah/cerai" >
         <button class="button"><span class="mif-folder"></span></button>
     </div>
     <div class="input-control file full-size" data-role="input">
-        <input type="file" name="foto_4" accept="image/*" placeholder="Pekerjaan">
+        <input type="file" name="foto_4" accept="image/*" placeholder="Pekerjaan" >
         <button class="button"><span class="mif-folder"></span></button>
     </div>
     <div class="input-control file full-size" data-role="input">
-        <input type="file" name="foto_5" accept="image/*" placeholder="Foto lainnya">
+        <input type="file" name="foto_5" accept="image/*" placeholder="Foto lainnya" >
         <button class="button"><span class="mif-folder"></span></button>
     </div>
     <button type="submit" name="simpan" class="button primary">Simpan</button>
